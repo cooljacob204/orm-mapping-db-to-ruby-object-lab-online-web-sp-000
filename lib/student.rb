@@ -63,7 +63,7 @@ class Student
     first_X_students_in_grade_10(1)[0]
   end
   
-  def self.all_students_in_grade_9
+  def self.all_students_in_grade_X
     students = []
     sql = <<-SQL 
          SELECT * FROM students WHERE students.grade==9
