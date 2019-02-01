@@ -36,6 +36,31 @@ class Student
        SQL
    student_rows = DB[:conn].execute(sql)
    student_rows.each {|i| students << new_from_db(i)}
+   students
+  end
+  
+  def self.students_below_12th_grade
+    students = []
+    sql = <<-SQL 
+         SELECT * FROM students WHERE students.grade<12
+       SQL
+   student_rows = DB[:conn].execute(sql)
+   student_rows.each {|i| students << new_from_db(i)}
+   students
+  end
+  
+  def self.first_X_students_in_grade_10(x)
+    students = []
+    sql = <<-SQL 
+         SELECT * FROM students WHERE students.grade==10 LIMIT ?
+       SQL
+   student_rows = DB[:conn].execute(sql, x)
+   student_rows.each {|i| students << new_from_db(i)}
+   students
+  end
+  
+  def self.first_student_in_grade_10(x)
+    first_X_students_in_grade_10(1)
   end
   
   def save
